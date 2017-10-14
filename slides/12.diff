@@ -1,0 +1,10 @@
+> main.go
+|
+| package main
+|
++ import "flag"
+|
++ func main() {
++     addr := flag.String("addr", ":3000", "the addr of the service")
++     flag.Parse()
++ }

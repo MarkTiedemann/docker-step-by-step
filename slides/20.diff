@@ -1,0 +1,7 @@
+> Dockerfile
+|
+| FROM golang:1.9-alpine3.6
+| WORKDIR /service
+# # Copy all files from your local
+# # working directory into the image
++ COPY . .

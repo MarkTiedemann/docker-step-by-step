@@ -1,0 +1,5 @@
+$ ./2-TUTORIAL
+|
+# # Create an executable in `go`.
+# # Write a `Dockerfile`.
++ # Implement a server in `go`.

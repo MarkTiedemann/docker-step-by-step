@@ -1,0 +1,6 @@
+> Dockerfile
+|
+| FROM golang:1.9-alpine3.6
+# # Specify the working directory
+# # in the image
++ WORKDIR /service
