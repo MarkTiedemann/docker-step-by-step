@@ -12,5 +12,5 @@
 |     addr := flag.String("addr", ":3000", "the addr of the service")
 |     flag.Parse()
 +     http.ListenAndServe(*addr, nil)
-|     log.Printf("Listening on %s", *addr)
+-     log.Printf("Listening on %s", *addr)
 | }
