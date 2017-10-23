@@ -1,12 +1,5 @@
-> Dockerfile
+$ go run main.go
+| Listening on :3000
 |
-| FROM golang:1.9-alpine3.6
-| WORKDIR /service
-| COPY . .
-- CMD go run main.go -addr=:3000
-# # Specify the entrypoint executable
-# # for the container
-+ ENTRYPOINT ["go", "run", "main.go"]
-# # Specify the arguments that should be
-# # passed to the executable
-+ CMD ["-addr=:3000"]
+$ go run main.go -addr=:5000
++ Listening on :5000

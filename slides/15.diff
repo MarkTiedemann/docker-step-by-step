@@ -1,5 +1,9 @@
-$ go run main.go
-| Listening on :3000
+$ ./1-INTRO
 |
-$ go run main.go -addr=:5000
-+ Listening on :5000
+# # Lifecycle
+|
+# # build an image
+$ docker build
+|
+# # create a container from an image
++ docker create

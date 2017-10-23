@@ -1,12 +1,6 @@
-$ ./QUICK-RECAP
+> Dockerfile
 |
-| - Specify at least one of <span\wstyle="color:\wmediumslateblue;">`CMD`</span> or <span\wstyle="color:\wmediumslateblue;">`ENTRYPOINT`</span>.
-|
-| - <span\wstyle="color:\wmediumslateblue;">`ENTRYPOINT`</span> should be used when the container
-|   is run as an executable.
-|
-| - <span\wstyle="color:\wmediumslateblue;">`CMD`</span> can be used to define default arguments
-|   for an <span\wstyle="color:\wmediumslateblue;">`ENTRYPOINT`</span>.
-|
-| - <span\wstyle="color:\wmediumslateblue;">`CMD`</span> will be overridden when running
-|   the container with alternative arguments.
+| FROM golang:1.9-alpine3.6
+# # Specify the working directory
+# # in the image
++ WORKDIR /service

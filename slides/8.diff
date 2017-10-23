@@ -1,4 +1,10 @@
-$ ./2-TUTORIAL
+$ ./1-INTRO
 |
-# # Create an executable in `go`.
-+ # Write a `Dockerfile`.
+# # Characteristics
+|
+# - Isolation:
+|   Makes applications resource-isolated (different kernel
+|   namespaces, overlay file system)
+|
+# - Portability:
++   Makes applications operating system and hardware independent

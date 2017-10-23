@@ -1,0 +1,4 @@
+> Dockerfile
+|
+# # Build image again
+$ docker build --tag my-service .

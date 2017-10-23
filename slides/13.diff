@@ -1,15 +1,3 @@
-> main.go
+$ ./1-INTRO
 |
-| package main
-|
-- import "flag"
-+ import (
-+     "flag"
-+     "log"
-+ )
-|
-| func main() {
-|     addr := flag.String("addr", ":3000", "the addr of the service")
-|     flag.Parse()
-+     log.Printf("Listening on %s", *addr)
-| }
++ # Lifecycle

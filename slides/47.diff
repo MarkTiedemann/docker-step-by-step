@@ -1,0 +1,15 @@
+> Dockerfile
+|
+| FROM golang:1.9-alpine3.6
+| WORKDIR /service
+| COPY . .
+| RUN go build
+| ENTRYPOINT ["./service"]
+| CMD ["-addr=:3000"]
+|
+|
+# # Build image again
+$ docker build --tag my-service .
+|
+# # Run container with arguments
+$ docker run my-service -addr=:5000

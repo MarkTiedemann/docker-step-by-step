@@ -1,3 +1,7 @@
-$ ./2-TUTORIAL
+$ ./1-INTRO
 |
-+ # Create an executable in `go`.
+# # Characteristics
+|
+# - Isolation:
++   Makes applications resource-isolated (different kernel
++   namespaces, overlay file system)

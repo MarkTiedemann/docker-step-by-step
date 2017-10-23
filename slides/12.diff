@@ -1,10 +1,4 @@
-> main.go
+$ ./1-INTRO
 |
-| package main
-|
-+ import "flag"
-|
-+ func main() {
-+     addr := flag.String("addr", ":3000", "the addr of the service")
-+     flag.Parse()
-+ }
+# # Architecture
+| <img\wsrc="https://docs.docker.com/engine/article-img/architecture.svg"></img>

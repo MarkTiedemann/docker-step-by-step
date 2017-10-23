@@ -1,5 +1,14 @@
-$ ./2-TUTORIAL
+$ ./1-INTRO
 |
-# # Create an executable in `go`.
-# # Write a `Dockerfile`.
-+ # Implement a server in `go`.
+# # Characteristics
+|
+# - Isolation:
+|   Makes applications resource-isolated (different kernel
+|   namespaces, overlay file system)
+|
+# - Portability:
+|   Makes applications operating system and hardware independent
+|
+# - Predictability:
++   Allows you to package an application and its dependencies in
++   a reproducable way

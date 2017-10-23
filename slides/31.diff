@@ -1,12 +1,6 @@
-> Dockerfile
+$ ./2-TUTORIAL
 |
-| FROM golang:1.9-alpine3.6
-| WORKDIR /service
-| COPY . .
-| RUN go build
-| ENTRYPOINT ["./service"]
-| CMD ["-addr=:3000"]
-|
-|
-# # Build image again
-$ docker build --tag my-service .
++ ✔ Create an executable in `go`.
+# # Write a `Dockerfile`.
+# # Implement a server in `go`.
+# # Write a multi-stage `Dockerfile`.

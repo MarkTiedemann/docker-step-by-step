@@ -1,0 +1,15 @@
+> Dockerfile
+|
+| FROM golang:1.9-alpine3.6 AS build
+| WORKDIR /service
+| COPY . .
+| RUN go build
+|
+| FROM alpine:3.6
+| WORKDIR /service
+# # Copy executable from build image
+# # to runtime image
++ COPY --from=build /service .
+| EXPOSE 3000
+| ENTRYPOINT ["./service"]
+| CMD ["-addr=:3000"]

@@ -1,4 +1,15 @@
-> Dockerfile
+$ ./1-INTRO
 |
-# # Specify the image plus version
-+ FROM golang:1.9-alpine3.6
+# # Lifecycle
+|
+# # build an image
+$ docker build
+|
+# # create a container from an image
+- docker create
+|
+# # start a container
+- docker start
+|
+# # create a container and start it
++ docker run

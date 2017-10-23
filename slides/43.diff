@@ -1,0 +1,9 @@
+> Dockerfile
+|
+| FROM golang:1.9-alpine3.6
+| WORKDIR /service
+| COPY . .
+- RUN go run main.go -addr=:3000
+# # Specify a command that should be passed
+# # to the container when it will be run
++ CMD go run main.go -addr=:3000

@@ -1,0 +1,7 @@
+> Dockerfile
+|
+# # Build image again
+$ docker build --tag my-service .
+|
+# # Run container
+$ docker run my-service -addr=:4000

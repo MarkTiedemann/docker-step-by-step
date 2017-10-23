@@ -1,0 +1,11 @@
+> Dockerfile
+|
+# # Build image again
+$ docker build --tag my-service .
+|
+# # Run container
+$ docker run -p 4000:4000 my-service -addr=:4000
+|
+# # Call service
+$ curl localhost:4000
++ Let's go!
