@@ -1,33 +1,42 @@
 body {
   background: black;
+  color: white;
   font-family: monospace;
   font-size: 20px;
   padding: 40px 60px;
 }
+
 a:link,
 a:visited,
 a:hover,
 a:active {
   color: skyblue;
 } 
+
 p {
   margin: 3px;
 }
+
 .file {
   color: fuchsia;
 }
+
 .shell {
   color: orange;
 }
+
 .code {
   color: white;
 }
+
 .comment {
   color: mediumslateblue;
 }
+
 .add {
   color: springgreen;
 }
+
 .rm {
   color: crimson;
 }
