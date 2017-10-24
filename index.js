@@ -1,7 +1,14 @@
 'use strict'
 
+// UTILS
+
 const deepEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b)
-const hash = () => window.location.hash.slice(1)
+const getHash = () => Number(window.location.hash.slice(1)) || 0
+const setHash = number => {
+  window.location.hash = `#${number}`
+}
+
+// COMPONENTS
 
 function Paragraph(className, text) {
   const para = document.createElement('p')
@@ -40,10 +47,17 @@ function Slide(text) {
   return frag
 }
 
+function ErrMsg(msg) {
+  const span = document.createElement('span')
+  span.classList.add('error')
+  span.textContent = msg
+  return span
+}
+
 class Component {
-  constructor(props, initialState) {
+  constructor(props) {
     this.props = props
-    this.setState(initialState)
+    this.setState({ number: getHash() })
     this.init()
   }
 
@@ -71,22 +85,27 @@ class Component {
 
 class Presentation extends Component {
   init() {
-    document.addEventListener('hashchange', this.onHashChange.bind(this))
-    document.addEventListener('keydown', this.onKeyDown.bind(this))
-  }
-
-  onHashChange() {
-    this.setState({ number: Number(hash()) })
-  }
-
-  onKeyDown(event) {
-    const { number } = this.state
-    switch (event.keyCode) {
-      case 37: // left
-        return this.setState({ number: number - 1 })
-      case 39: // right
-        return this.setState({ number: number + 1 })
+    const onHashchange = () => {
+      this.setState({ number: getHash() })
     }
+
+    const onKeydown = event => {
+      const { number } = this.state
+      switch (event.keyCode) {
+        case 37: // left
+          return this.setState({ number: number - 1 })
+        case 39: // right
+          return this.setState({ number: number + 1 })
+      }
+    }
+
+    window.addEventListener('hashchange', onHashchange, false)
+    document.addEventListener('keydown', onKeydown, false)
+
+    window.addEventListener('unload', () => {
+      window.removeEventListener('hashchange', onHashchange)
+      document.removeEventListener('keydown', onKeydown)
+    })
   }
 
   render() {
@@ -94,23 +113,37 @@ class Presentation extends Component {
     const { number } = this.state
 
     if (error) {
-      return document.createTextNode(error.message)
+      return ErrMsg(error.message)
     }
 
-    window.location.hash = `#${number}`
+    setHash(number)
 
-    return Slide(slides[number])
+    const slide = slides[number]
+
+    if (!slide) {
+      return ErrMsg('404 - Not Found')
+    }
+
+    return Slide(slide)
   }
 }
 
+// MAIN
+
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
+
+  const ensureOk = res =>
+    !res.ok
+      ? Promise.reject(new Error(`${res.status} - ${res.statusText}`))
+      : Promise.resolve(res)
+
+  const onSlides = slides => new Presentation({ slides, root })
+  const onError = error => new Presentation({ error, root })
+
   fetch('slides.json')
+    .then(ensureOk)
     .then(res => res.json())
-    .then(slides => {
-      const props = { slides, root }
-      const initialState = { number: Number(hash()) }
-      new Presentation(props, initialState)
-    })
-    .catch(error => new Presentation({ error, root }))
+    .then(onSlides)
+    .catch(onError)
 })
