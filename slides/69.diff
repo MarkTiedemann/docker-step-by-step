@@ -6,7 +6,10 @@
 | RUN go build
 |
 | FROM alpine:3.6
-+ WORKDIR /service
+| WORKDIR /service
+# # Copy executable from build image
+# # to runtime image
++ COPY --from=build /service .
 | EXPOSE 3000
 | ENTRYPOINT ["./service"]
 | CMD ["-addr=:3000"]

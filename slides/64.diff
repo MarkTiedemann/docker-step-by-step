@@ -1,14 +1,11 @@
 > Dockerfile
 |
-# # Name build image
-- FROM golang:1.9-alpine3.6
-+ FROM golang:1.9-alpine3.6 AS build
-| WORKDIR /service
-| COPY . .
-| RUN go build
-+
-# # Name runtime image
-+ FROM alpine:3.6
-| EXPOSE 3000
-| ENTRYPOINT ["./service"]
-| CMD ["-addr=:3000"]
+# # Build image again
+$ docker build --tag my-service .
+|
+# # Run container
+$ docker run -p 4000:4000 my-service -addr=:4000
+|
+# # Call service
+$ curl localhost:4000
++ Let's go!

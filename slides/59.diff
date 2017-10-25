@@ -1,5 +1,7 @@
-- (╯°□°）╯︵ ┻━┻
-- WTF, THERE IS NO OUTPUT!
+> Dockerfile
 |
-# # NOTE: The container ports are isolated
-# #       from the operating system ports!
+# # Build image again
+$ docker build --tag my-service .
+|
+# # Run container
+$ docker run my-service -addr=:4000

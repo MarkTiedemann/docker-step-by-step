@@ -1,20 +1,6 @@
-> main.go
+$ ./2-TUTORIAL
 |
-| package main
-|
-| import (
-|     "flag"
-|     "log"
-|     "net/http"
-| )
-|
-| func main() {
-|     addr := flag.String("addr", ":3000", "the addr of the service")
-|     flag.Parse()
-+     http.HandleFunc("/", handler)
-|     log.Fatal(http.ListenAndServe(*addr, nil))
-|     log.Printf("Listening on %s", *addr)
-| }
-|
-+ func handler(w http.ResponseWriter, r *http.Request) {
-+ }
+# ✔ Create an executable in `go`.
++ ✔ Write a `Dockerfile`.
+# # Implement a server in `go`.
+# # Write a multi-stage `Dockerfile`.

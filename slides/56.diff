@@ -1,7 +1,21 @@
-> Dockerfile
+> main.go
 |
-# # Build image again
-$ docker build --tag my-service .
+| package main
 |
-# # Run container
-$ docker run my-service -addr=:4000
+| import (
+|     "flag"
+|     "log"
+|     "net/http"
+| )
+|
+| func main() {
+|     addr := flag.String("addr", ":3000", "the addr of the service")
+|     flag.Parse()
+|     http.HandleFunc("/", handler)
+|     log.Fatal(http.ListenAndServe(*addr, nil))
+|     log.Printf("Listening on %s", *addr)
+| }
+|
+| func handler(w http.ResponseWriter, r *http.Request) {
++     log.Printf("%s %s", r.Method, r.URL.Path)
+| }

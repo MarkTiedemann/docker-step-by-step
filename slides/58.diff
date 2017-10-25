@@ -1,2 +1,4 @@
-- (╯°□°）╯︵ ┻━┻
-- WTF, THERE IS NO OUTPUT!
+> Dockerfile
+|
+# # Build image again
+$ docker build --tag my-service .

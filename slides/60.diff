@@ -4,9 +4,7 @@
 $ docker build --tag my-service .
 |
 # # Run container
-- docker run my-service -addr=:4000
-# # Publish port 4000 from the container to the OS
-+ docker run -p 4000:4000 my-service -addr=:4000
+$ docker run my-service -addr=:4000
 |
 # # Call service
-$ curl localhost:4000
++ curl localhost:4000

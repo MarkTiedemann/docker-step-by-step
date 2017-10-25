@@ -4,7 +4,6 @@
 |
 | import (
 |     "flag"
-|     "fmt"
 |     "log"
 |     "net/http"
 | )
@@ -12,12 +11,7 @@
 | func main() {
 |     addr := flag.String("addr", ":3000", "the addr of the service")
 |     flag.Parse()
-|     http.HandleFunc("/", handler)
-|     log.Fatal(http.ListenAndServe(*addr, nil))
+-     http.ListenAndServe(*addr, nil)
++     log.Fatal(http.ListenAndServe(*addr, nil))
 |     log.Printf("Listening on %s", *addr)
-| }
-|
-| func handler(w http.ResponseWriter, r *http.Request) {
-|     log.Printf("%s %s", r.Method, r.URL.Path)
-+     fmt.Fprintf(w, "Let's go!")
 | }

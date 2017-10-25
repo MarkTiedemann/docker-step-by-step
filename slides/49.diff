@@ -1,6 +1,6 @@
-$ ./2-TUTORIAL
+$ ./QUICK-RECAP
 |
-# ✔ Create an executable in `go`.
-+ ✔ Write a `Dockerfile`.
-# # Implement a server in `go`.
-# # Write a multi-stage `Dockerfile`.
+| - Specify at least one of <span\wstyle="color:\wmediumslateblue;">`CMD`</span> or <span\wstyle="color:\wmediumslateblue;">`ENTRYPOINT`</span>.
+|
++ - <span\wstyle="color:\wmediumslateblue;">`ENTRYPOINT`</span> should be used when the container
++   is run as an executable.

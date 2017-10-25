@@ -1,16 +1,9 @@
-> main.go
+$ ./QUICK-RECAP
 |
-| package main
+| - Specify at least one of <span\wstyle="color:\wmediumslateblue;">`CMD`</span> or <span\wstyle="color:\wmediumslateblue;">`ENTRYPOINT`</span>.
 |
-| import (
-|     "flag"
-|     "log"
-+     "net/http"
-| )
+| - <span\wstyle="color:\wmediumslateblue;">`ENTRYPOINT`</span> should be used when the container
+|   is run as an executable.
 |
-| func main() {
-|     addr := flag.String("addr", ":3000", "the addr of the service")
-|     flag.Parse()
-+     http.ListenAndServe(*addr, nil)
--     log.Printf("Listening on %s", *addr)
-| }
++ - <span\wstyle="color:\wmediumslateblue;">`CMD`</span> can be used to define default arguments
++   for an <span\wstyle="color:\wmediumslateblue;">`ENTRYPOINT`</span>.
