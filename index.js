@@ -7,6 +7,7 @@ const getHash = () => Number(window.location.hash.slice(1)) || 0
 const setHash = number => {
   window.location.hash = `#${number}`
 }
+const getWidth = () => document.documentElement.clientWidth
 
 // COMPONENTS
 
@@ -61,7 +62,8 @@ class Component {
     this.init()
   }
 
-  setState(newState) {
+  setState(state) {
+    const newState = Object.assign({}, this.state, state)
     if (!deepEqual(this.state, newState)) {
       this.state = newState
       this.unmount()
@@ -99,12 +101,47 @@ class Presentation extends Component {
       }
     }
 
+    const onTouchstart = event => {
+      this.setState({ touchstartX: event.touches[0].clientX })
+    }
+
+    const onTouchmove = event => {
+      this.setState({ touchmoveX: event.touches[0].clientX })
+    }
+
+    const onTouchend = event => {
+      const { touchstartX, touchmoveX, number } = this.state
+
+      if (!touchstartX || !touchmoveX) return
+
+      const diff = touchstartX - touchmoveX
+      const threshold = getWidth() * 0.1
+
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          // swipe left, go right
+          this.setState({ number: number + 1 })
+        } else {
+          // swipe right, go left
+          this.setState({ number: number - 1 })
+        }
+      }
+
+      this.setState({ touchstartX: null, touchmoveX: null })
+    }
+
     window.addEventListener('hashchange', onHashchange, false)
     document.addEventListener('keydown', onKeydown, false)
+    document.addEventListener('touchstart', onTouchstart, false)
+    document.addEventListener('touchmove', onTouchmove, false)
+    document.addEventListener('touchend', onTouchend, false)
 
     window.addEventListener('unload', () => {
       window.removeEventListener('hashchange', onHashchange)
       document.removeEventListener('keydown', onKeydown)
+      document.removeEventListener('touchstart', onTouchstart)
+      document.removeEventListener('touchmove', onTouchmove)
+      document.removeEventListener('touchend', onTouchend)
     })
   }
 
