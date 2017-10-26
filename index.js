@@ -2,12 +2,10 @@
 
 // UTILS
 
-const deepEqual = (a, b) => JSON.stringify(a) === JSON.stringify(b)
 const getHash = () => Number(window.location.hash.slice(1)) || 0
-const setHash = number => {
-  window.location.hash = `#${number}`
+const setHash = page => {
+  window.location.hash = `#${page}`
 }
-const getWidth = () => document.documentElement.clientWidth
 
 // COMPONENTS
 
@@ -58,18 +56,14 @@ function ErrMsg(msg) {
 class Component {
   constructor(props) {
     this.props = props
-    this.setState({ number: getHash() })
     this.init()
   }
 
   setState(state) {
-    const newState = Object.assign({}, this.state, state)
-    if (!deepEqual(this.state, newState)) {
-      this.state = newState
-      this.unmount()
-      const node = this.render()
-      this.mount(node)
-    }
+    this.state = Object.assign({}, this.state, state)
+    this.unmount()
+    const node = this.render()
+    this.mount(node)
   }
 
   mount(node) {
@@ -87,17 +81,19 @@ class Component {
 
 class Presentation extends Component {
   init() {
+    this.setState({ page: getHash() })
+
     const onHashchange = () => {
-      this.setState({ number: getHash() })
+      this.setState({ page: getHash() })
     }
 
     const onKeydown = event => {
-      const { number } = this.state
+      const { page } = this.state
       switch (event.keyCode) {
         case 37: // left
-          return this.setState({ number: number - 1 })
+          return this.setState({ page: page - 1 })
         case 39: // right
-          return this.setState({ number: number + 1 })
+          return this.setState({ page: page + 1 })
       }
     }
 
@@ -110,20 +106,20 @@ class Presentation extends Component {
     }
 
     const onTouchend = event => {
-      const { touchstartX, touchmoveX, number } = this.state
+      const { touchstartX, touchmoveX, page } = this.state
 
       if (!touchstartX || !touchmoveX) return
 
       const diff = touchstartX - touchmoveX
-      const threshold = getWidth() * 0.1
+      const threshold = 0.1 * document.documentElement.clientWidth
 
       if (Math.abs(diff) > threshold) {
         if (diff > 0) {
           // swipe left, go right
-          this.setState({ number: number + 1 })
+          this.setState({ page: page + 1 })
         } else {
           // swipe right, go left
-          this.setState({ number: number - 1 })
+          this.setState({ page: page - 1 })
         }
       }
 
@@ -147,15 +143,15 @@ class Presentation extends Component {
 
   render() {
     const { error, slides } = this.props
-    const { number } = this.state
+    const { page } = this.state
 
     if (error) {
       return ErrMsg(error.message)
     }
 
-    setHash(number)
+    setHash(page)
 
-    const slide = slides[number]
+    const slide = slides[page]
 
     if (!slide) {
       return ErrMsg('404 - Not Found')
