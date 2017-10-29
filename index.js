@@ -54,7 +54,6 @@ function ErrMsg(msg) {
 }
 
 class Component {
-
   constructor(props) {
     this.props = props
   }
@@ -85,7 +84,7 @@ class Component {
 class Presentation extends Component {
   constructor(props) {
     super(props)
-    this.state = { page: getHash() }
+    this.setState({ page: getHash() })
     this.initEventListeners()
   }
 
@@ -149,7 +148,7 @@ class Presentation extends Component {
   }
 
   shouldRerender(oldState, newState) {
-    return oldState.page !== newState.page
+    return !oldState || oldState.page !== newState.page
   }
 
   render() {
