@@ -54,6 +54,11 @@ function ErrMsg(msg) {
 }
 
 class Component {
+
+  constructor(props) {
+    this.props = props
+  }
+
   setState(state) {
     const newState = Object.assign({}, this.state, state)
     if (this.shouldRerender(this.state, newState)) {
@@ -79,7 +84,7 @@ class Component {
 
 class Presentation extends Component {
   constructor(props) {
-    this.props = props
+    super(props)
     this.state = { page: getHash() }
     this.initEventListeners()
   }
