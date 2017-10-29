@@ -54,16 +54,14 @@ function ErrMsg(msg) {
 }
 
 class Component {
-  constructor(props) {
-    this.props = props
-    this.init()
-  }
-
   setState(state) {
-    this.state = Object.assign({}, this.state, state)
-    this.unmount()
-    const node = this.render()
-    this.mount(node)
+    const newState = Object.assign({}, this.state, state)
+    if (this.shouldRerender(this.state, newState)) {
+      this.state = newState
+      this.unmount()
+      const node = this.render()
+      this.mount(node)
+    }
   }
 
   mount(node) {
@@ -80,9 +78,13 @@ class Component {
 }
 
 class Presentation extends Component {
-  init() {
-    this.setState({ page: getHash() })
+  constructor(props) {
+    this.props = props
+    this.state = { page: getHash() }
+    this.initEventListeners()
+  }
 
+  initEventListeners() {
     const onHashchange = () => {
       this.setState({ page: getHash() })
     }
@@ -139,6 +141,10 @@ class Presentation extends Component {
       document.removeEventListener('touchmove', onTouchmove)
       document.removeEventListener('touchend', onTouchend)
     })
+  }
+
+  shouldRerender(oldState, newState) {
+    return oldState.page !== newState.page
   }
 
   render() {
